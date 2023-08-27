@@ -12,4 +12,3 @@ const port = process.env.DEV_PORT || 3000;
 initApp(app, express);
 
 app.listen(port, () => console.log(`App is listening on port ${port}!`));
-const x = 9;
