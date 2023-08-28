@@ -15,6 +15,7 @@ const whitelist = ["http://127.0.0.1:5500"];
 // Allow CORS
 export const initApp = (app, express) => {
   app.use((req, res, next) => {
+    console.log(req.headers.host);
     if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.setHeader("Access-Control-Allow-Methods", "GET");
