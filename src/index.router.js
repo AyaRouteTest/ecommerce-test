@@ -10,10 +10,7 @@ import { connectDB } from "../DB/connection.js";
 import { globalErrorHandling } from "./utils/errorHandling.js";
 const config = process.env;
 
-const whitelist = [
-  "http://127.0.0.1:5500",
-  "https://ecommerce-vercel-1kcw8sbzv-ayaothmanroute.vercel.app",
-];
+const whitelist = ["http://127.0.0.1:5500", "http://127.0.0.1:3000"];
 
 // Allow CORS
 export const initApp = (app, express) => {
