@@ -10,7 +10,7 @@ import { connectDB } from "../DB/connection.js";
 import { globalErrorHandling } from "./utils/errorHandling.js";
 const config = process.env;
 
-const whitelist = ["http://127.0.0.1:5500", "http://127.0.0.1:3000"];
+const whitelist = ["http://127.0.0.1:5590", "http://127.0.0.1:3000"];
 
 // Allow CORS
 export const initApp = (app, express) => {
