@@ -8,41 +8,31 @@ import productRouter from "./modules/product/product.router.js";
 import subcategoryRouter from "./modules/subcategory/subcategory.router.js";
 import { connectDB } from "../DB/connection.js";
 import { globalErrorHandling } from "./utils/errorHandling.js";
-import cors from "cors";
 const config = process.env;
 
-// const whitelist = ["http://127.0.0.1:5500"];
+const whitelist = ["http://127.0.0.1:5500"];
 
+// Allow CORS
 export const initApp = (app, express) => {
-  // app.use((req, res, next) => {
-  //   console.log(req.header("origin"));
-  //   if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
-  //     console.log("first if");
-  //     res.setHeader("Access-Control-Allow-Origin", "*");
-  //     res.setHeader("Access-Control-Allow-Methods", "GET");
-  //     return next();
-  //   }
-  //   if (!whitelist.includes(req.header("origin"))) {
-  //     console.log("second if");
-  //     return next(new Error("Not Allowed by CORS!"));
-  //   }
+  app.use((req, res, next) => {
+    if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Access-Control-Allow-Methods", "GET");
+      return next();
+    }
+    if (!whitelist.includes(req.header("origin"))) {
+      return next(new Error("Not Allowed by CORS!"));
+    }
 
-  //   res.setHeader("Access-Control-Allow-Origin", "*");
-  //   res.setHeader("Access-Control-Allow-Headers", "*");
-  //   res.setHeader("Access-Control-Allow-Private-Network", "true");
-  //   res.setHeader("Access-Control-Allow-Methods", "*");
-  //   return next();
-  // });
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers", "*");
+    res.setHeader("Access-Control-Allow-Private-Network", "true");
+    res.setHeader("Access-Control-Allow-Methods", "*");
+    return next();
+  });
 
   // Parsing buffer data to json object
   app.use(express.json({}));
-
-  // Allow CORS
-  app.use(
-    cors({
-      origin: "http://127.0.0.1:5000",
-    })
-  );
 
   // Application routes
   app.use(`${config.BASE_URL}/auth`, authRouter);
