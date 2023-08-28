@@ -10,12 +10,11 @@ import { connectDB } from "../DB/connection.js";
 import { globalErrorHandling } from "./utils/errorHandling.js";
 const config = process.env;
 
-const whitelist = ["http://127.0.0.1:5500", "http://197.62.211.160:5500"];
+const whitelist = ["http://127.0.0.1:5500"];
 
 // Allow CORS
 export const initApp = (app, express) => {
   app.use((req, res, next) => {
-    console.log(req.header("origin"))
     if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.setHeader("Access-Control-Allow-Methods", "GET");
@@ -24,7 +23,6 @@ export const initApp = (app, express) => {
     if (!whitelist.includes(req.header("origin"))) {
       return next(new Error("Not Allowed by CORS!"));
     }
-
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "*");
     res.setHeader("Access-Control-Allow-Private-Network", "true");

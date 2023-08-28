@@ -9,9 +9,6 @@ dotenv.config({ path: path.join(__dirname, "./config/.env") });
 const app = express();
 const port = process.env.DEV_PORT || 3000;
 
-app.use((req, res) => {
-  console.log(req.header("origin"));
-});
 initApp(app, express);
 
 app.listen(port, () => console.log(`App is listening on port ${port}!`));
