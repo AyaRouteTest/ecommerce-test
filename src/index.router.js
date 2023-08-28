@@ -8,35 +8,38 @@ import productRouter from "./modules/product/product.router.js";
 import subcategoryRouter from "./modules/subcategory/subcategory.router.js";
 import { connectDB } from "../DB/connection.js";
 import { globalErrorHandling } from "./utils/errorHandling.js";
+import cors from "cors";
 const config = process.env;
 
-const whitelist = [
-  "http://127.0.0.1:5500",
-  "http://197.62.211.160:5000",
-  "http://197.62.211.160:3000",
-];
+// const whitelist = [
+//   "http://127.0.0.1:5500",
+//   "http://197.62.211.160:5000",
+//   "http://197.62.211.160:3000",
+// ];
 
-// Allow CORS
+// // Allow CORS
 export const initApp = (app, express) => {
-  app.use((req, res, next) => {
-    console.log(req.headers.host);
-    if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET");
-      return next();
-    }
-    if (!whitelist.includes(req.header("origin"))) {
-      return next(new Error("Not Allowed by CORS!"));
-    }
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    res.setHeader("Access-Control-Allow-Private-Network", "true");
-    res.setHeader("Access-Control-Allow-Methods", "*");
-    return next();
-  });
+  //   app.use((req, res, next) => {
+  //     console.log(req.headers.host);
+  //     if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
+  //       res.setHeader("Access-Control-Allow-Origin", "*");
+  //       res.setHeader("Access-Control-Allow-Methods", "GET");
+  //       return next();
+  //     }
+  //     if (!whitelist.includes(req.header("origin"))) {
+  //       return next(new Error("Not Allowed by CORS!"));
+  //     }
+  //     res.setHeader("Access-Control-Allow-Origin", "*");
+  //     res.setHeader("Access-Control-Allow-Headers", "*");
+  //     res.setHeader("Access-Control-Allow-Private-Network", "true");
+  //     res.setHeader("Access-Control-Allow-Methods", "*");
+  //     return next();
+  //   });
 
   // Parsing buffer data to json object
   app.use(express.json({}));
+
+  app.use(cors());
 
   // Application routes
   app.use(`${config.BASE_URL}/auth`, authRouter);
