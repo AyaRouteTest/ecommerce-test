@@ -27,10 +27,10 @@ export const initApp = (app, express) => {
     console.log("client IP: ", requestIp.getClientIp(req));
     console.log("req: ", req);
     console.log("originalURL: ", req.originalUrl);
-
     console.log("baseURL: ", req.baseUrl);
+    return res.json({ request: req });
 
-    console.log(req.headers.host);
+    // console.log(req.headers.host);
     if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.setHeader("Access-Control-Allow-Methods", "GET");
