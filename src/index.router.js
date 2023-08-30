@@ -9,6 +9,7 @@ import subcategoryRouter from "./modules/subcategory/subcategory.router.js";
 import { connectDB } from "../DB/connection.js";
 import { globalErrorHandling } from "./utils/errorHandling.js";
 import cors from "cors";
+import requestIp from "request-ip";
 const config = process.env;
 
 // const whitelist = [
@@ -36,10 +37,14 @@ export const initApp = (app, express) => {
   //     return next();
   //   });
 
+  app.use((req, res, next) => {
+    console.log("client IP: ", requestIp.getClientIp(req));
+    return next();
+  });
+  app.use(cors());
+
   // Parsing buffer data to json object
   app.use(express.json({}));
-
-  app.use(cors());
 
   // Application routes
   app.use(`${config.BASE_URL}/auth`, authRouter);
