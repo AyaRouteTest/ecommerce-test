@@ -24,26 +24,27 @@ const whitelist = [
 // Allow CORS
 export const initApp = (app, express) => {
   app.use((req, res, next) => {
-    console.log("client IP: ", requestIp.getClientIp(req));
-    console.log("req: ", req);
-    console.log("originalURL: ", req.originalUrl);
-    console.log("baseURL: ", req.baseUrl);
     return res.json({ request: req });
 
-    // console.log(req.headers.host);
-    if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET");
-      return next();
-    }
-    if (!whitelist.includes(req.header("origin"))) {
-      return next(new Error("Not Allowed by CORS!"));
-    }
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Headers", "*");
-    res.setHeader("Access-Control-Allow-Private-Network", "true");
-    res.setHeader("Access-Control-Allow-Methods", "*");
-    return next();
+    // console.log("client IP: ", requestIp.getClientIp(req));
+    // console.log("req: ", req);
+    // console.log("originalURL: ", req.originalUrl);
+    // console.log("baseURL: ", req.baseUrl);
+
+    // // console.log(req.headers.host);
+    // if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
+    //   res.setHeader("Access-Control-Allow-Origin", "*");
+    //   res.setHeader("Access-Control-Allow-Methods", "GET");
+    //   return next();
+    // }
+    // if (!whitelist.includes(req.header("origin"))) {
+    //   return next(new Error("Not Allowed by CORS!"));
+    // }
+    // res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.setHeader("Access-Control-Allow-Headers", "*");
+    // res.setHeader("Access-Control-Allow-Private-Network", "true");
+    // res.setHeader("Access-Control-Allow-Methods", "*");
+    // return next();
   });
 
   // app.use(cors());
