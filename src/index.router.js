@@ -26,7 +26,7 @@ export const initApp = (app, express) => {
   app.use((req, res, next) => {
     console.log("client IP: ", requestIp.getClientIp(req));
     console.log("originalURL: ", req.originalUrl);
-    console.log("URL: ", req.url);
+    console.log("baseURL: ", req.baseUrl);
 
     console.log(req.headers.host);
     if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
