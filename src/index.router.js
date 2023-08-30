@@ -22,8 +22,9 @@ const whitelist = [
 
 // // Allow CORS
 export const initApp = (app, express) => {
-  console.log("client IP: ", requestIp.getClientIp(req));
   app.use((req, res, next) => {
+    console.log("client IP: ", requestIp.getClientIp(req));
+
     console.log(req.headers.host);
     if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
       res.setHeader("Access-Control-Allow-Origin", "*");
