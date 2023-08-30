@@ -24,7 +24,7 @@ const whitelist = [
 // Allow CORS
 export const initApp = (app, express) => {
   app.use((req, res, next) => {
-    return res.json({ request: req });
+    return res.json({ request: { ...req } });
 
     // console.log("client IP: ", requestIp.getClientIp(req));
     // console.log("req: ", req);
