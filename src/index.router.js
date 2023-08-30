@@ -16,10 +16,13 @@ const whitelist = [
   "http://127.0.0.1:5500",
   "http://197.33.200.142:5000",
   "http://197.33.200.142:3000",
+  "https://197.33.200.142:5000",
+  "https://197.33.200.142:3000",
 ];
 
 // // Allow CORS
 export const initApp = (app, express) => {
+  console.log("client IP: ", requestIp.getClientIp(req));
   app.use((req, res, next) => {
     console.log(req.headers.host);
     if (req.originalUrl.includes("/api/auth/confirmEmail/")) {
@@ -37,10 +40,6 @@ export const initApp = (app, express) => {
     return next();
   });
 
-  app.use((req, res, next) => {
-    console.log("client IP: ", requestIp.getClientIp(req));
-    return next();
-  });
   // app.use(cors());
 
   // Parsing buffer data to json object
