@@ -46,4 +46,10 @@ router.post(
   asyncHandler(order.checkOut)
 );
 
+router.post(
+  "/webhook",
+  express.raw({ type: "application/json" }),
+  asyncHandler(order.webhook)
+);
+
 export default router;
